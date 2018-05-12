@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polito.tdp.dizionariograph.model.Parola;
+
 public class WordDAO {
 
 	/*
@@ -26,7 +28,7 @@ public class WordDAO {
 			while (res.next()) {
 				parole.add(res.getString("nome"));
 			}
-
+			conn.close();
 			return parole;
 
 		} catch (SQLException e) {
@@ -34,5 +36,36 @@ public class WordDAO {
 			throw new RuntimeException("Error Connection Database");
 		}
 	}
+
+	public List<Parola> aggiungiArchiTramiteQuery(String p, String s) {
+		String sql = "SELECT p2.nome " + 
+				"FROM parola as p1, parola as p2 " + 
+				"WHERE p1.nome = ? " + 
+				"AND p1.nome != p2.nome " + 
+				"AND p2.nome LIKE ? ";
+		List<Parola> parole = new ArrayList<Parola>();
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, p);
+			st.setString(2, s);
+			
+			ResultSet res = st.executeQuery();
+
+			while (res.next()) {
+				parole.add(new Parola(res.getString("p2.nome")));
+			}
+			conn.close();
+			return parole;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
+	
+	
+	
 
 }

@@ -8,7 +8,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class ConnectDB {
 
-	private static final String jdbcURL = "jdbc:mysql://localhost/dizionario";
+	private static final String jdbcURL = "jdbc:mysql://localhost/dizionario?user=root";
 	private static HikariDataSource ds;
 	
 	public static Connection getConnection() {

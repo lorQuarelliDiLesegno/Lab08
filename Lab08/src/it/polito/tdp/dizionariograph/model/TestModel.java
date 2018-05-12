@@ -9,6 +9,8 @@ public class TestModel {
 		Model model = new Model();
 		
 		model.createGraph(4);
+		
+		/*
 		System.out.println(String.format("**Grafo creato**\n"));
 		
 		List<String> vicini = model.displayNeighbours("casa");
@@ -16,6 +18,9 @@ public class TestModel {
 		
 		System.out.println("Cerco il vertice con grado massimo...");
 		System.out.println(model.findMaxDegree());
+		*/
+		
+		
 	}
 
 }
